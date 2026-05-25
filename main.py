@@ -4,14 +4,15 @@ while True:
     print("\n--- Student Record Management System ---")
     print("1. Add Student")
     print("2. View Students")
-    print("3. Exit")
+    print("3. Search Student")
+    print("4. Exit")
 
     choice = input("Enter your choice: ")
 
     if choice == "1":
         name = input("Enter student name: ")
         usn = input("Enter USN: ")
-        marks = input("Enter marks: ")
+        marks = int(input("Enter marks: "))
 
         student = {
             "name": name,
@@ -33,6 +34,23 @@ while True:
                 print("Marks:", student["marks"])
 
     elif choice == "3":
+        search = input("Enter name or USN: ")
+
+        found = False
+
+        for student in students:
+            if student["name"] == search or student["usn"] == search:
+                print("\nStudent Found:")
+                print("Name:", student["name"])
+                print("USN:", student["usn"])
+                print("Marks:", student["marks"])
+                found = True
+                break
+
+        if not found:
+            print("Student not found.")
+        
+    elif choice == "4":
         print("Exiting program...")
         break
 
