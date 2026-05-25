@@ -5,7 +5,8 @@ while True:
     print("1. Add Student")
     print("2. View Students")
     print("3. Search Student")
-    print("4. Exit")
+    print("4. Delete Student")
+    print("5. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -49,8 +50,23 @@ while True:
 
         if not found:
             print("Student not found.")
-        
+
     elif choice == "4":
+        delete_usn = input("Enter USN of student to delete: ")
+
+        found = False
+
+        for student in students:
+            if student["usn"] == delete_usn:
+                students.remove(student)
+                print("Student deleted successfully!")
+                found = True
+                break
+
+        if not found:
+            print("Student not found.")
+
+    elif choice == "5":
         print("Exiting program...")
         break
 
