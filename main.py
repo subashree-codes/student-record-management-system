@@ -1,4 +1,31 @@
-students = []
+#print("PROGRAM STARTED")
+def load_students():
+    students = []
+    try:
+        file = open("students.txt", "r")
+        for line in file:
+            data = line.strip().split(",")
+            student = {
+                "name": data[0],
+                "usn": data[1],
+                "marks": int(data[2])
+            }
+            students.append(student)
+        file.close()
+    except:
+        pass
+    return students
+
+def save_students(students):
+    file = open("students.txt", "w")
+    for student in students:
+        file.write(student["name"] + "," +
+                   student["usn"] + "," +
+                   str(student["marks"]) + "\n")
+    file.close()
+    
+    
+students = load_students()
 
 while True:
     print("\n--- Student Record Management System ---")
@@ -9,6 +36,7 @@ while True:
     print("5. Exit")
 
     choice = input("Enter your choice: ")
+    #print("DEBUG choice =", choice)
 
     if choice == "1":
         name = input("Enter student name: ")
@@ -24,6 +52,9 @@ while True:
         students.append(student)
 
         print("Student added successfully!")
+        save_students(students)
+        #import os
+        #print("Saving in:", os.getcwd())
 
     elif choice == "2":
         if len(students) == 0:
@@ -54,16 +85,20 @@ while True:
     elif choice == "4":
         delete_usn = input("Enter USN of student to delete: ")
 
+        new_students = []
         found = False
 
         for student in students:
-            if student["usn"] == delete_usn:
-                students.remove(student)
-                print("Student deleted successfully!")
+            if student["usn"] != delete_usn:
+                new_students.append(student)
+            else:
                 found = True
-                break
 
-        if not found:
+        if found:
+            students = new_students
+            save_students(students)
+            print("Student deleted successfully!")
+        else:
             print("Student not found.")
 
     elif choice == "5":
