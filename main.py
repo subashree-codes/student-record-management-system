@@ -24,7 +24,19 @@ def save_students(students):
                    str(student["marks"]) + "\n")
     file.close()
     
-    
+def calculate_grade(marks):
+    if marks >= 90:
+        return "A+"
+    elif marks >= 75:
+        return "A"
+    elif marks >= 60:
+        return "B"
+    elif marks >= 40:
+        return "C"
+    else:
+        return "F"
+
+
 students = load_students()
 
 while True:
@@ -64,6 +76,7 @@ while True:
                 print("\nName:", student["name"])
                 print("USN:", student["usn"])
                 print("Marks:", student["marks"])
+                print("Grade:", calculate_grade(student["marks"]))
 
     elif choice == "3":
         search = input("Enter name or USN: ")
@@ -76,6 +89,7 @@ while True:
                 print("Name:", student["name"])
                 print("USN:", student["usn"])
                 print("Marks:", student["marks"])
+                print("Grade:", calculate_grade(student["marks"]))
                 found = True
                 break
 
